@@ -4,5 +4,15 @@ function getScriptInterface(parentClass, map) {
       super();
       map.set(this, parentClass._GetInitInst().GetSdkInstance());
     }
+
+    loadSnapshotObj(data) {
+      const inst = map.get(this);
+      return inst._LoadFromSnapshotObj(data);
+    }
+
+    snapshotObj() {
+      const inst = map.get(this);
+      return inst._SnapshotObj();
+    }
   };
 }

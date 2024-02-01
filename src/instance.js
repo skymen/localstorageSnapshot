@@ -18,7 +18,7 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
       // load state for savegames
     }
     // ==== ACES ====
-    async _Snapshot() {
+    async _SnapshotObj() {
       const storage = this._runtime._projectStorage;
       const keys = await storage.keys();
       const data = {};
@@ -29,17 +29,23 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
           })
         )
       );
-      this._lastSnapshot = JSON.stringify(data);
+      return data;
+    }
+    async _Snapshot() {
+      this._lastSnapshot = JSON.stringify(await this._SnapshotObj());
       this.Trigger("OnSnapshot");
+    }
+    async _LoadFromSnapshotObj(data) {
+      const storage = this._runtime._projectStorage;
+      await storage.clear();
+      await Promise.all(
+        Object.keys(data).map((key) => storage.setItem(key, data[key]))
+      );
     }
     async _LoadFromSnapshot(dataStr) {
       try {
         const data = JSON.parse(dataStr);
-        const storage = this._runtime._projectStorage;
-        await storage.clear();
-        await Promise.all(
-          Object.keys(data).map((key) => storage.setItem(key, data[key]))
-        );
+        await this._LoadFromSnapshotObj(data);
       } catch (e) {
         console.error(e);
       }

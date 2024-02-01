@@ -4,7 +4,7 @@ const Config = {
   addonType: "plugin",
   id: "skymen_localstoragesnapshot",
   name: "Local Storage Snapshot",
-  version: "1.0.0.0",
+  version: "1.0.0.1",
   category:
     // "3d",
     "data-and-storage",
