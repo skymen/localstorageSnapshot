@@ -45,6 +45,8 @@ The main files you may want to look at would be instance.js and scriptInterface.
 | --- | --- | --- |
 | Snapshot | Snapshot the entire localstorage |  |
 | Load from snapshot | Load from a snapshot | Snapshot             *(string)* <br> |
+| Save snapshot to file | Save the snapshot to a file | Path mode             *(combo)* <br>Filename             *(string)* <br> |
+| Load snapshot from file | Load the snapshot from a file | Path mode             *(combo)* <br>Filename             *(string)* <br> |
 
 
 ---
