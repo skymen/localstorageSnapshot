@@ -51,6 +51,16 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
       }
       this.Trigger("OnLoaded");
     }
+    async _SaveSnapshotToFile(pathMode, path) {
+      await this.PostToDOMAsync("save-to-file", [
+        pathMode,
+        path,
+        await this._SnapshotObj(),
+      ]);
+    }
+    async _LoadSnapshotFromFile(pathMode, path) {
+      await this.PostToDOMAsync("load-from-file", [pathMode, path]);
+    }
     _OnSnapshot() {
       return true;
     }

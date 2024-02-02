@@ -4,7 +4,7 @@ const Config = {
   addonType: "plugin",
   id: "skymen_localstoragesnapshot",
   name: "Local Storage Snapshot",
-  version: "1.0.0.1",
+  version: "1.0.0.2",
   category:
     // "3d",
     "data-and-storage",
@@ -25,7 +25,7 @@ const Config = {
   // icon: "icon.svg", // defaults to "icon.svg" if omitted
   type: "object", // world, object, dom
   domSideScripts: [
-    //"domSide.js", // no need to include "c3runtime/" prefix
+    "domSide.js", // no need to include "c3runtime/" prefix
   ],
 
   /* extensionScript: {
@@ -264,6 +264,58 @@ const Config = {
       listName: "Load from snapshot",
       displayText: "Load from snapshot {0}",
       description: "Load from a snapshot",
+    },
+    SaveSnapshotToFile: {
+      category: "general",
+      forward: "_SaveSnapshotToFile",
+      autoScriptInterface: true,
+      isAsync: true,
+      params: [
+        {
+          id: "pathMode",
+          name: "Path mode",
+          desc: "The path mode to use",
+          type: "combo",
+          initialValue: "appdata",
+          items: [{ appdata: "AppData" }, { absolute: "Absolute path" }],
+        },
+        {
+          id: "filename",
+          name: "Filename",
+          desc: "The filename to save the snapshot to",
+          type: "string",
+          initialValue: '"snapshot.json"',
+        },
+      ],
+      listName: "Save snapshot to file",
+      displayText: "Save snapshot to {0} {1}",
+      description: "Save the snapshot to a file",
+    },
+    LoadSnapshotFromFile: {
+      category: "general",
+      forward: "_LoadSnapshotFromFile",
+      autoScriptInterface: true,
+      isAsync: true,
+      params: [
+        {
+          id: "pathMode",
+          name: "Path mode",
+          desc: "The path mode to use",
+          type: "combo",
+          initialValue: "appdata",
+          items: [{ appdata: "AppData" }, { absolute: "Absolute path" }],
+        },
+        {
+          id: "filename",
+          name: "Filename",
+          desc: "The filename to load the snapshot from",
+          type: "string",
+          initialValue: '"snapshot.json"',
+        },
+      ],
+      listName: "Load snapshot from file",
+      displayText: "Load snapshot from {0} {1}",
+      description: "Load the snapshot from a file",
     },
   },
   Cnds: {
